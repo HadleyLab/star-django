@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-SERIES_MATRIX_URL = 'ftp://ftp.ncbi.nih.gov/pub/geo/DATA/SeriesMatrix/'
+SERIES_MATRIX_URL = 'ftp://ftp.ncbi.nih.gov/geo/series/'
 SERIES_MATRIX_MIRROR = os.environ['SERIES_MATRIX_MIRROR']
 
 
@@ -203,9 +203,10 @@ def get_matrix_nondata_lines(inStream):
 
 
 def get_matrix_filename(gse_name, gpl_name):
+    prefix = re.sub(r'\d{1,3}$', 'nnn', gse_name)
     filenames = [
-        "%s/%s_series_matrix.txt.gz" % (gse_name, gse_name),
-        "%s/%s-%s_series_matrix.txt.gz" % (gse_name, gse_name, gpl_name),
+        "%s/%s/matrix/%s_series_matrix.txt.gz" % (prefix, gse_name, gse_name),
+        "%s/%s/matrix/%s-%s_series_matrix.txt.gz" % (prefix, gse_name, gse_name, gpl_name),
     ]
 
     for filename in filenames:
