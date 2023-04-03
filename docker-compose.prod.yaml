@@ -1,12 +1,22 @@
-version: '2'
 services:
   db:
     image: postgres:9.4
     environment:
-      POSTGRES_DB: star
+      - POSTGRES_DB=star
+      - POSTGRES_PASSWORD
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "${PGUSER:-postgres}" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   redis:
     image: redis:3
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   app:
     build:
@@ -14,24 +24,27 @@ services:
       dockerfile: Dockerfile.prod
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
-    - db
-    - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     ports:
-    - "8000:8000"
+      - "8000:8000"
     env_file: .env.prod
 
   celery:
-    build: Dockerfile.prod
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
     command: celery -A stargeo worker -l info
     depends_on:
-    - db
-    - redis
+      - db
+      - redis
     ports:
-    - "8000:8000"
+      - "8000:8000"
     env_file: .env.prod
     environment:
       C_FORCE_ROOT: "True"
-
   # frontend:
   #   build: frontend
   #   command: yarn run dev
@@ -39,5 +52,3 @@ services:
   #   - ./frontend:/app/user
   #   ports:
   #   - 8082:8082
-
-
