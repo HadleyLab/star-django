@@ -20,7 +20,7 @@
 3. Clone code locally:
 
     ```bash
-    git clone git@github.com:idrdex/star-django.git stargeo
+    git clone git@github.com:HadleyLab/star-django.git stargeo
     cd stargeo
     ```
 
@@ -72,7 +72,7 @@ Here are steps to make local deployment of this app in order to tinker it.
 1. Get sources:
 
     ```bash
-    git clone git@github.com:idrdex/star-django.git
+    git clone git@github.com:HadleyLab/star-django.git
     cd star-django
     ```
 
