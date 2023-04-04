@@ -22,5 +22,5 @@ jobs:
           context: .
           file: Dockerfile.prod
           push: true
-          tags: hadleylab/star-django-app:latest
+          tags: bedasoftware/stargeo:latest
           platforms: linux/amd64,linux/arm64
