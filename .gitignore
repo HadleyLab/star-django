@@ -15,3 +15,5 @@ frontend/npm-debug.log
 .ropeproject
 *bundle.js
 public
+
+.python-version
