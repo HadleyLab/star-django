@@ -22,7 +22,7 @@ django-jinja-bootstrap-form==4.0.3
 django-pandas==0.4.5
 django-registration==2.0.4
 django-rest-swagger==2.1.1
-djangorestframework==3.5.3
+djangorestframework==3.11.2
 easydict==1.7
 Fabric3==1.13.1.post1
 ftptool==0.7.1
