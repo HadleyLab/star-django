@@ -20,7 +20,7 @@ django-filter==1.1.0
 django-jinja==2.4.1
 django-jinja-bootstrap-form==4.0.3
 django-pandas==0.4.5
-django-registration==2.0.4
+django-registration==3.1.2
 django-rest-swagger==2.1.1
 djangorestframework==3.5.3
 easydict==1.7
