@@ -7,9 +7,9 @@ services:
       - POSTGRES_PASSWORD
     healthcheck:
       test: [ "CMD", "pg_isready", "-U", "${PGUSER:-postgres}" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+      interval: 1s
+      timeout: 10s
+      retries: 50
 
   redis:
     image: redis:3

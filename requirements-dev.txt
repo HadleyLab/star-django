@@ -5,7 +5,7 @@ flake8>=3.5.0
 flake8-print
 flake8-per-file-ignores
 pep8-naming
-pytest==2.6.4
+pytest~=2.9
 pytest-django==3.1.2
 lxml
 cssselect
