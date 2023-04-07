@@ -14,7 +14,7 @@ handy==0.7
 honcho==0.6.4
 Jinja2==2.11.3
 psycopg2==2.7.3.2
-redis==2.10.6
+redis==4.4.4
 celery==3.1.17
 tqdm==4.19.5
 requests==2.18.4
