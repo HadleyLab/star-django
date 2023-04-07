@@ -6,7 +6,7 @@ billiard==3.3.0.23
 biopython==1.68
 boto==2.38.0
 celery==3.1.17
-certifi==2018.10.15
+certifi==2022.12.7
 cffi==1.11.5
 chardet==3.0.4
 coreapi==2.3.3
