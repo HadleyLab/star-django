@@ -18,7 +18,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - run: >-
-          docker buildx build --platform linux/arm64,linux/amd64
-          -f Dockerfile.prod
-          --push -t ${{ env.BUILD_IMAGE }} .
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: Dockerfile.prod
+          push: true
+          tags: ${{ env.BUILD_IMAGE }}
+          platforms: linux/amd64
