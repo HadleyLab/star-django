@@ -20,7 +20,7 @@ tqdm==4.19.5
 requests==2.18.4
 ftptool==0.7.1
 django-cacheops==4.0.5
-pandas==0.22
+pandas==0.22.0
 termcolor==1.1.0
 numpy==1.16.1
 numexpr==2.6.2  # There is an issue with newer version
@@ -34,6 +34,6 @@ django-datatable-view-compat==0.8.2
 boto==2.38.0
 rpy2==2.8.6
 django-registration==2.0.4
-biopython==1.68
+biopython==1.76
 mygene==3.0.0
 requests-oauthlib==0.8.0
