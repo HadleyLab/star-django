@@ -11,7 +11,7 @@ RUN mkdir -p /app/user /app/logs
 WORKDIR /app/user
 RUN pip install --upgrade pip
 ADD requirements.txt /app/user/requirements.txt
-RUN pip install --exists-action=s -r requirements.txt
+RUN pip install -r requirements.txt
 # Add code
 ADD . /app/user
 EXPOSE 8000
