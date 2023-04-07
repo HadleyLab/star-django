@@ -7,6 +7,8 @@ jobs:
   release:
     name: Build and release image to Docker Hub
     runs-on: ubuntu-latest
+    env:
+      BUILD_IMAGE: bedasoftware/stargeo:latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up Docker Buildx
@@ -16,11 +18,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: Dockerfile.prod
-          push: true
-          tags: bedasoftware/stargeo:latest
-          platforms: linux/amd64,linux/arm64
+      - run: >-
+          docker buildx build --platform linux/arm64,linux/amd64
+          -f Dockerfile.prod
+          --push -t ${{ env.BUILD_IMAGE }} .
