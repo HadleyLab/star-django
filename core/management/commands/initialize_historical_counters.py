@@ -4,6 +4,7 @@ from collections import defaultdict
 from tqdm import tqdm
 from handy.db import queryset_iterator
 from datetime import datetime, timedelta
+from django.conf import settings
 from django.db.models import Count, Q
 from django.db import transaction
 from django.core.management import BaseCommand
@@ -12,9 +13,11 @@ from legacy.models import Series, Sample, Platform
 from core.models import User
 from tags.models import (Tag, SeriesAnnotation, SeriesTag, SampleTag,
                          SerieValidation, SampleValidation, )
+import pytz
 
 MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 SPECIES = {'9606': 'human', '10090': 'mouse', '10116': 'rat'}
+timezone = pytz.timezone(settings.TIME_ZONE)
 
 def ceil_attrs_date(model):
     month, day, year = model.attrs.get('submission_date', 'Jan 1 1960').split()
@@ -24,10 +27,10 @@ def ceil_attrs_date(model):
 
 def ceil_date(date):
     next_month = datetime(date.year, date.month, 1) + timedelta(days=31)
-    return datetime(next_month.year, next_month.month, 1)
+    return timezone.localize(datetime(next_month.year, next_month.month, 1))
 
 
-START_DATE = datetime(2014, 10, 1)
+START_DATE = timezone.localize(datetime(2014, 10, 10))
 CURRENT_DATE = ceil_date(datetime.now())
 
 def accumulate(data):
@@ -129,6 +132,7 @@ class Command(BaseCommand):
             platforms_data = [
                 [platform_created_on[item['gpl_name']], item['probes_count']]
                 for item in platform_qs.filter(specie=specie)
+                if item['gpl_name'] in platform_created_on
             ]
             platforms[specie] = accumulate(count_by(first, platforms_data))
             group = group_values(platforms_data)
@@ -172,7 +176,7 @@ class Command(BaseCommand):
 
         delta = CURRENT_DATE - START_DATE
         keys = sorted(set(ceil_date(START_DATE + timedelta(days=index * 20))
-                          for index in range(delta.days / 20 + 1)))
+                          for index in range(int(delta.days / 20 + 1))))
 
         specie_data = {
             'series': series,
