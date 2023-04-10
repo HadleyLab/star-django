@@ -24,5 +24,4 @@ COPY --from=builder /app/dist /app/user/public
 RUN pip install --exists-action=s -r requirements.txt
 # Add code
 COPY . /app/user/
-RUN python manage.py collectstatic --noinput
 EXPOSE 8000
