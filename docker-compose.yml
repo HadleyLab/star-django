@@ -1,25 +1,44 @@
-version: '2'
+name: stargeo-dev
 services:
   db:
     image: postgres:9.4
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "${PGUSER:-postgres}" ]
+      interval: 1s
+      timeout: 10s
+      retries: 50
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
 
   redis:
     image: redis:3
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
-  server:
+  app:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
-    - db
-    - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     ports:
-    - "8000:8000"
+      - 8001:8000
     env_file: .env
 
   celery:
     build: .
     command: celery -A stargeo worker -l info
-    links:
-    - db
-    - redis
+    ports:
+      - 8000:8000
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     env_file: .env

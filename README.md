@@ -146,3 +146,12 @@ Here are steps to make local deployment of this app in order to tinker it.
     ```bash
     fab deploy
     ```
+
+
+## Restore backup
+
+### restore
+```bash
+docker compose -f <compose-config-file> up -d <db_service_name>
+zcat < db_dump__arch_file.sql.gz | docker exec -i <db_container_name_or_id> psql -U <db_user> <db_name>
+```

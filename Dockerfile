@@ -1,4 +1,4 @@
-FROM python:2.7-slim
+FROM python:3.6.9-slim
 # Install R and its meta package
 RUN apt-get update && apt-get install -y --no-install-recommends \
      r-base-core r-base-dev \
@@ -10,10 +10,8 @@ RUN bash -c "echo 'install.packages(\"meta\",repos=\"http://cran.rstudio.com/\")
 RUN mkdir -p /app/user /app/logs
 WORKDIR /app/user
 RUN pip install --upgrade pip
-RUN pip install fabric
-ADD requirements.txt /app/user/requirements.txt
-ADD requirements-dev.txt /app/user/requirements-dev.txt
-RUN pip install --src /src -r requirements-dev.txt
+COPY requirements.txt requirements-dev.txt /app/user/
+RUN pip install -r requirements.txt -r requirements-dev.txt
 # Add code
-ADD . /app/user
+COPY . .
 EXPOSE 8000
