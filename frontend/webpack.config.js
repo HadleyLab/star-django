@@ -9,7 +9,7 @@ module.exports = {
     },
     devtool: 'source-map',
     output: {
-        path: path.join(__dirname, 'public'),
+        path: path.join(__dirname, 'dist'),
         filename: '[name].bundle.js',
         library: ['App', '[name]'],
         libraryTarget: 'window',

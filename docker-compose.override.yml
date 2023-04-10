@@ -19,7 +19,7 @@ services:
   frontend:
     build:
       context: frontend
-    command: yarn run dev
+    command: yarn dev
     volumes:
     - ./frontend:/app/user
     ports:
