@@ -16,3 +16,4 @@ frontend/npm-debug.log
 *bundle.js
 public
 .python-version
+gunicorn.pid
