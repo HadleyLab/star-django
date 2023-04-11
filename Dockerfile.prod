@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 RUN bash -c "echo 'install.packages(\"meta\",repos=\"http://cran.rstudio.com/\")' | R --no-save"
 # Install Python deps
-RUN mkdir -p /app/user /app/logs /app/public
+RUN mkdir -p /app/user /app/logs /app/user/public
 WORKDIR /app/user
 RUN pip install --upgrade pip
 COPY requirements.txt /app/user/
