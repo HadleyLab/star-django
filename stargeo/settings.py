@@ -160,7 +160,7 @@ TEMPLATES = [
             "match_regex": r'(.*\.(j2|jinja)$|(^registration.*(?<!email|bject|d_out)\.\w+$))',
             "context_processors": _TEMPLATE_CONTEXT_PROCESSORS,
             "constants": {
-                "FRONTEND": "http://localhost:8082/" if DEBUG else STATIC_URL + 'dist/'
+                "FRONTEND": "http://localhost:8082/" if DEBUG else STATIC_URL
             }
         }
     },
