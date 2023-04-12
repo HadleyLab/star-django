@@ -21,4 +21,4 @@ initialize_historical_counters:
 	docker compose -f compose.prod.yaml exec -i app python manage.py initialize_historical_counters
 
 initialize_historical_pmid_counters:
-	docker compose -f compose.prod.yaml exec -i app python manage.py initialize_historical_pmid_counters.py
+	docker compose -f compose.prod.yaml exec -i app python manage.py initialize_historical_pmid_counters
