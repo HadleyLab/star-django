@@ -29,7 +29,7 @@ class Command(BaseCommand):
 
         delta = CURRENT_DATE - START_DATE
         keys = sorted(set(ceil_date(START_DATE + timedelta(days=index * 20))
-                          for index in range(delta.days / 20 + 1)))
+                          for index in range(int(delta.days / 20 + 1))))
 
         for index, date in enumerate(keys):
             hc = HistoricalCounter.objects.filter(created_on=date).first()
