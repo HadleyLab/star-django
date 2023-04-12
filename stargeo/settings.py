@@ -231,11 +231,6 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, '../logs/debug.log'),
             'formatter': 'verbose'
         },
-        'mail_admins': {'class': 'logging.NullHandler'} if DEBUG else {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'include_html': True,
-        },
         'null': {
             'level': 'DEBUG',
             'class': 'logging.NullHandler',
@@ -248,7 +243,7 @@ LOGGING = {
             'propagate': True,
         },
         'django.request': {
-            'handlers': ['mail_admins', 'console'],
+            'handlers': ['console'],
             'level': 'ERROR',
             'propagate': True,
         },
