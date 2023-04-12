@@ -17,3 +17,4 @@ frontend/npm-debug.log
 public
 .python-version
 gunicorn.pid
+.DS_Store
